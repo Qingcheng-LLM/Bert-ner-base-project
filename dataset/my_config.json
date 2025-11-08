@@ -1,0 +1,18 @@
+{
+  "label_file": "E:/Desktop/BERT-NER/dataset/class.txt",
+  "train_file": "E:/Desktop/BERT-NER/dataset/train.txt",
+  "dev_file": "E:/Desktop/BERT-NER/dataset/dev.txt",
+  "test_file": "E:/Desktop/BERT-NER/dataset/test.txt",
+  "target_dir": "result",
+  "bert_embedding": 768,
+  "dropout": 0.4,
+  "epochs": 24,
+  "batch_size": 8,
+  "patience": 2,
+  "lr": 0.0001,
+  "lr_decay": 0.00001,
+  "weight_decay": 1e-4,
+  "max_grad_norm": 1.0,
+  "pretrain_model_path": "./pre_model/xd1651fhtfhtfh/bert-base-chinese",
+  "tokenizer_path ": "./pre_model/xd1651fhtfhtfh/bert-base-chinese"
+}
