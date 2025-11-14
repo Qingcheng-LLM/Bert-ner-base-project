@@ -19,4 +19,4 @@
  2.chinese-bert-wwm  下载地址:https://huggingface.co/hfl/chinese-bert-wwm
 
 #🗓项目目录:  
-![image](https://github.com/Qingcheng-LLM/Bert-ner-base-project?tab=readme-ov-file.png)  
+![image](https://github.com/Qingcheng-LLM/Bert-ner-base-project/blob/main/images/%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95%E5%9B%BE.png)  
