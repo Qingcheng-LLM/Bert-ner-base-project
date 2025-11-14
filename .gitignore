@@ -1,0 +1,53 @@
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+*.egg
+
+# ---------- 编辑器/系统 ----------
+.vscode/
+*.code-workspace
+.DS_Store
+Thumbs.db
+
+# ---------- 虚拟环境 ----------
+.env/
+.venv/
+venv/
+conda-env/
+
+# ---------- Jupyter ----------
+.ipynb_checkpoints/
+
+# ---------- 日志与训练输出 ----------
+logs/
+*.log
+result/
+tensorboard_logs/
+wandb/
+
+# ---------- 缓存 ----------
+.cache/
+huggingface/
+transformers_cache/
+hf_cache/
+
+# ---------- 大文件（数据与权重） ----------
+# 数据集（保留说明文件）
+dataset/**
+!dataset/.gitkeep
+!dataset/README.md
+
+# 预训练权重目录（保留下载脚本与说明）
+pre_model/**
+!pre_model/downloadmodel.py
+!pre_model/README.md
+
+# ---------- 压缩包/临时 ----------
+*.zip
+*.tar
+*.tar.gz
+*.tmp

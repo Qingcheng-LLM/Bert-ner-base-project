@@ -1,0 +1,19 @@
+{
+  "dataset_name": "weibo",
+  "data_dir": "dataset/weibo",
+  "train_file": "train.txt",
+  "dev_file": "dev.txt",
+  "test_file": "test.txt",
+  "label_file": "labels.txt",
+  "target_dir": "result/${dataset_name}_${model_name}",
+  "bert_embedding": 768,
+  "dropout": 0.1,
+  "epochs": 10,
+  "batch_size": 32,
+  "patience": 6,
+  "lr": 5e-5,
+  "lr_decay": 0.00001,
+  "weight_decay": 0.01,
+  "max_grad_norm": 1.0,
+  "model_name_or_path": "pre_model/bert-base-chinese" 
+}
