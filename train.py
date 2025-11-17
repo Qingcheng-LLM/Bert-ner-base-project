@@ -2,7 +2,7 @@ import time
 from tqdm import tqdm
 import torch.nn as nn
 #训练模型
-def train(model,dataloader,optimizer,max_gradient_norm, writer=None, epoch=None):
+def train(model,dataloader,optimizer,max_gradient_norm, writer=None, epoch=None, scheduler=None):
     model.train()             #开启训练模式
     device = next(model.parameters()).device  #直接从模型参数获取设备
     epoch_start =time.time()  #记录epoch开始时间
@@ -25,6 +25,8 @@ def train(model,dataloader,optimizer,max_gradient_norm, writer=None, epoch=None)
     #4、梯度裁剪  参数更新
         nn.utils.clip_grad_norm_(model.parameters(), max_gradient_norm) #「梯度裁剪」来防止梯度爆炸
         optimizer.step()                                                #根据反向传播计算新梯度来「更新参数」
+        if scheduler is not None:
+            scheduler.step()  #更新学习率
     #5、记录该批次训练指标
         batch_time_avg += time.time() - batch_start   #累计每个批次的训练时间
         running_loss += loss.item()                   #累计损失值

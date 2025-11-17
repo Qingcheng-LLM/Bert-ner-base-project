@@ -9,7 +9,7 @@ from my_config import my_Config,load_json
 from Dataset import NERDataset
 from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter      # 数据可视化工具
-from torch.optim.lr_scheduler import CosineAnnealingLR # 学习率衰减
+from transformers import get_linear_schedule_with_warmup
 from transformers import BertTokenizerFast#​HuggingFace提供的批处理函数用于告诉DataLoader如何把多个样本合并成一个 batch。1、动态计算每 batch中最长的序列长度；2、对input_ids、attention_mask、labels做填充；3、保证 padding 部分的 label 为 -100（不参与 loss 计算）；4、最终返回可直接输入模型的 batch 张量。
 from model import Bert_ner
 from train import train
@@ -48,7 +48,9 @@ def main():
     tagset_size = train_dataset.tagset_size()   #从处理完的训练数据中获取标签数量
     model = Bert_ner(config,tagset_size).to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr=config.lr, weight_decay=config.weight_decay) #定义优化器（参数：学习率、学习率衰减、权重衰减）
-    scheduler = CosineAnnealingLR(optimizer, T_max=config.epochs, eta_min=1e-6) #动态调整学习率（指标不提升时衰减学习率）使用自适应学习率调度器
+    total_steps = len(train_loader) * config_dict["epochs"]  #按批次计算总步数，因为get_linear_schedule_with_warmup 是按 batch 的设计
+    warmup_steps = int(total_steps * config_dict.get("warmup_ratio", 0.1))
+    scheduler = get_linear_schedule_with_warmup(optimizer,num_warmup_steps=warmup_steps,num_training_steps=total_steps,)
     # 初始化训练状态
     best_score = -1           #记录最佳验证集F1
     start_epoch = 1           #起始epoch为1
@@ -73,7 +75,7 @@ def main():
     for epoch in range(start_epoch, config.epochs+1): 
         print("* Training epoch {}:".format(epoch))
         # 调用train()函数完成一个epoch的训练，返回「本轮次耗时」and「损失」。并打印
-        epoch_time, epoch_loss = train(model,train_loader,optimizer,config.max_grad_norm, writer, epoch)
+        epoch_time, epoch_loss = train(model,train_loader,optimizer,config.max_grad_norm, writer, epoch,scheduler)
         print("-> Training time: {:.4f}s, loss = {:.4f}".format(epoch_time, epoch_loss))
         # 调用valid()函数完成一个epoch的验证，「返回耗时」and「损失」and「准确率、召回率、F1」。并打印
         epoch_time, valid_loss, valid_estimator = valid(model,dev_loader, dev_dataset)
