@@ -1,7 +1,7 @@
-# python -m main \--config configs/weibo.json \--model  pre_model/bert-base-chinese
-# python -m main \--config configs/weibo.json \--model  pre_model/chinese-bert-wwm
-# python -m main \--config configs/msra.json \--model  pre_model/bert-base-chinese
-# python -m main \--config configs/msra.json \--model  pre_model/chinese-bert-wwm
+# python -m main \--config BERT_NER_configs/weibo.json \--model  pre_model/bert-base-chinese
+# python -m main \--config BERT_NER_configs/weibo.json \--model  pre_model/chinese-bert-wwm
+# python -m main \--config BERT_NER_configs/msra.json \--model  pre_model/bert-base-chinese
+# python -m main \--config BERT_NER_configs/msra.json \--model  pre_model/chinese-bert-wwm
 #conda activate ner310
 import os
 import torch
@@ -21,7 +21,7 @@ def main():
     #-----------------------------------------------argparse/配置------------------------------------------------#
     parser = argparse.ArgumentParser()
     #为参数解析器添加配置文件路径和模型名称的命令行参数
-    parser.add_argument("--config", type=str, default="configs/weibo.json",help="配置文件路径：configs/weibo.json 或 configs/msra.json")
+    parser.add_argument("--config", type=str, default="BERT_NER_configs/weibo.json",help="配置文件路径：BERT_NER_configs/weibo.json 或 BERT_NER_configs/msra.json")
     parser.add_argument("--model", type=str, default=None,help="可选覆盖：pre_model/bert-base-chinese 或 pre_model/chinese-bert-wwm")#默认不覆盖配置文件中的模型设置
     args = parser.parse_args()#执行实际的命令行参数解析
     config_dict = load_json(args.config)#加载结构配置参数文件，返回包含配置参数的字典

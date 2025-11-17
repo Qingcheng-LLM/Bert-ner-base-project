@@ -21,4 +21,14 @@
  2.chinese-bert-wwm  下载地址:https://huggingface.co/hfl/chinese-bert-wwm
 
 ## 🗓项目目录: 
-![image](https://github.com/Qingcheng-LLM/Bert-ner-base-project/blob/main/images/%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95%E5%9B%BE.png)  
+BERT-NER/
+├─ BERT_NER_configs/            # 项目配置
+├─ dataset/                     # 数据集（msra/weibo）
+├─ pre_model/                   # 预训练模型与下载脚本
+├─ result/                      # 结果与日志
+├─ images/                      # README 配图
+├─ Dataset.py                   # 数据集读取
+├─ model.py                     # 模型结构
+├─ train.py / valid.py          # 训练与验证入口
+├─ main.py                      # 主入口
+└─ my_config.py / tool.py       # 配置与工具函数
