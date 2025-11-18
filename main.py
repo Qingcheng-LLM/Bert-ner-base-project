@@ -3,6 +3,9 @@
 # python -m main \--config BERT_NER_configs/msra.json \--model  pre_model/bert-base-chinese
 # python -m main \--config BERT_NER_configs/msra.json \--model  pre_model/chinese-bert-wwm
 #conda activate ner310
+#git add -A
+#git commit -m "update"
+#git push  
 import os
 import torch
 from my_config import my_Config,load_json
